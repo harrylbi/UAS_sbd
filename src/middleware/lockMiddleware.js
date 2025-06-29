@@ -1,6 +1,6 @@
 import db from '../db/db';
 
-const LOCK_TIMEOUT_SECONDS = 300; // 5 menit timeout
+const LOCK_TIMEOUT_SECONDS = 10; // 5 menit timeout
 
 export const lockResource = async (resourceId, userId, resourceType = 'stok') => {
   const table = resourceType === 'penjualan' ? 't_jual' : 'stok';
