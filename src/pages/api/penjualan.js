@@ -53,8 +53,6 @@ export default async function handler(req, res) {
       if (!tgl_trans || !kode_brg || !jml_jual || !sessionId) {
         return res.status(400).json({ message: 'Semua field harus diisi.' });
       }
-
-      // Validate input lengths
       if (kode_brg.length > 10) {
         return res.status(400).json({ message: 'Kode barang terlalu panjang (maksimal 10 karakter)' });
       }
@@ -62,12 +60,10 @@ export default async function handler(req, res) {
       if (parseInt(jml_jual) <= 0) {
         return res.status(400).json({ message: 'Jumlah jual harus lebih dari 0' });
       }
-
       let kd_trans;
       let attempts = 0;
       const maxAttempts = 5;
-
-      // Generate unique transaction ID with retry mechanism
+      
       while (attempts < maxAttempts) {
         kd_trans = generateTransactionId(sessionId);
         

@@ -1,5 +1,6 @@
 import { Geist, Geist_Mono } from "next/font/google";
-// import "./globals.css";
+import Link from "next/link";
+import "./globals.css";
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -20,9 +21,63 @@ export default function RootLayout({ children }) {
   return (
     <html lang="en">
       <body
-        className={`${geistSans.variable} ${geistMono.variable} antialiased`}
+        className={`${geistSans.variable} ${geistMono.variable} antialiased bg-white text-black`}
       >
-        {children}
+        {/* Navbar */}
+        <nav className="flex justify-between items-center px-8 py-4 border-b-2 border-black bg-white shadow-sm">
+          <Link href="/" className="text-2xl font-black tracking-wide hover:rotate-1 transition-transform">
+            $Inverse
+          </Link>
+          <ul className="flex gap-4">
+            <li>
+              <Link
+                href="/stok"
+                className="text-lg font-bold border-2 border-black px-4 py-2 bg-yellow-300 hover:bg-yellow-400 transition-all duration-200"
+              >
+                Stok
+              </Link>
+            </li>
+            <li>
+              <Link
+                href="/penjualan"
+                className="text-lg font-bold border-2 border-black px-4 py-2 bg-red-300 hover:bg-red-400 transition-all duration-200"
+              >
+                Penjualan
+              </Link>
+            </li>
+          </ul>
+        </nav>
+
+        {/* Main Content */}
+        <main className="p-6 bg-white max-w-6xl mx-auto">
+          {children || (
+            <div className="grid md:grid-cols-3 gap-6 mt-10">
+              <div className="border-2 border-black p-6 bg-blue-100 hover:bg-blue-200 transition-all">
+                <h2 className="text-xl font-bold mb-2">📦 Sistem Stok</h2>
+                <p className="text-sm">
+                  Lacak inventaris, jumlah barang masuk dan keluar dengan akurat.
+                </p>
+              </div>
+              <div className="border-2 border-black p-6 bg-green-100 hover:bg-green-200 transition-all">
+                <h2 className="text-xl font-bold mb-2">💰 Penjualan</h2>
+                <p className="text-sm">
+                  Pantau transaksi penjualan dan pendapatan harian dengan mudah.
+                </p>
+              </div>
+              <div className="border-2 border-black p-6 bg-pink-100 hover:bg-pink-200 transition-all">
+                <h2 className="text-xl font-bold mb-2">📊 Laporan</h2>
+                <p className="text-sm">
+                  Dapatkan ringkasan performa bisnis dan grafik interaktif.
+                </p>
+              </div>
+            </div>
+          )}
+        </main>
+
+        {/* Footer */}
+        <footer className="text-center text-sm border-t-2 border-black mt-12 py-4">
+          <p className="font-mono">© 2025 $Inverse. Brutalist design inspired.</p>
+        </footer>
       </body>
     </html>
   );
